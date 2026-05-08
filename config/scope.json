@@ -1,0 +1,25 @@
+{
+  "max_requests_per_endpoint": 1000,
+  "max_ids_to_test": 10000,
+  "enable_mass_testing": true,
+  "enable_graphql": true,
+  "enable_jwt_bypass": true,
+  "enable_param_pollution": true,
+  "enable_method_switching": true,
+  "enable_content_type_switching": true,
+  "forbidden_actions": [
+    "delete",
+    "account_deletion",
+    "password_reset",
+    "financial_transfer",
+    "credit_card_delete"
+  ],
+  "require_dangerous_flag_for": [
+    "delete",
+    "account_deletion",
+    "password_reset"
+  ],
+  "evidence_retention": "full",
+  "concurrent_workers": 10,
+  "timeout_seconds": 30
+}
