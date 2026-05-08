@@ -1,1 +1,0 @@
-# AGI-idor core package
